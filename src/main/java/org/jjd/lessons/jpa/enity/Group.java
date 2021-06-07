@@ -3,9 +3,7 @@ package org.jjd.lessons.jpa.enity;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +12,18 @@ import java.util.List;
  * Created by User on 04.06.2021.
  */
 @Entity
+// "duration" - имя столбца в таблице
+// Индексу можно присвоить имя
+@Table(name = "tb_groups", indexes = @Index(columnList = "duration", name = "ind_name"))
+// Именованные запросы
+@NamedQueries({ // Используется синтаксис JPQL. Вместо таблиц и их столбцов используются названия классов и их полей
+        // SQL: SELECT * FROM tb_groups;
+        // JPQL: SELECT g FROM Group g; -- выбрать все поля
+        // JPQL: SELECT g.title FROM Group g; -- выбрать поле title
+        // name - имя запроса, определяем сами
+        @NamedQuery(name = "group.get_all", query = "SELECT g FROM Group g"),
+        @NamedQuery(name = "group.get_by_title", query = "SELECT g FROM Group g WHERE g.title = :group_title")
+})
 public class Group extends Parent {
 
     @Getter

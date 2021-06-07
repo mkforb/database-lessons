@@ -48,8 +48,16 @@ public class JpaApp {
         // Обновление данных
         articleFromDb.setText("Новый текст");
         manager.getTransaction().begin();
-        manager.merge(articleFromDb);
-        manager.getTransaction().commit();
+        try {
+            manager.merge(articleFromDb);
+            // Запрос 2
+            // Запрос 3
+            manager.getTransaction().commit();
+        } catch (RuntimeException e) {
+            // getTransaction().rollback() откатывает транзакцию к состоянию на getTransaction().begin()
+            manager.getTransaction().rollback();
+        }
+
 
         System.out.println(manager.find(Article.class, key).getText());
 

@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class BookDao implements Dao<Book, Integer> {
     // В DAO-классе могут быть методы не только из ИФ
-    // Могут быть дополнительные методы для работой с БД
+    // Могут быть дополнительные методы для работы с БД
 
     public void createTable() {
         String createSql = "CREATE TABLE IF NOT EXISTS tb_books (" +

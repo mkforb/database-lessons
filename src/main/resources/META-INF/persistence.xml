@@ -43,7 +43,7 @@
                  create - пересоздавать таблицы при запуске (удалить и заново создать)
                  update - обновить структуру БД и таблиц
                  validate - проверить классы и ничего не делать (как none, только с проверкой) -->
-            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
             <!-- загрузка sql скрипта из файла -->
             <!-- <property name="javax.persistence.sql-load-script-source" value="META-INF/path_to_sql.sql" />-->
         </properties>
