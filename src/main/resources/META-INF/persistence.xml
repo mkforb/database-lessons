@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0">
+
+    <persistence-unit name="dbConfig" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <!-- Все Entity-классы нужно добавить в тег <class></class> -->
+        <class>org.jjd.lessons.jpa.enity.Message</class>
+        <!--<class>org.jjd.lessons.jpa.enity.Article</class>-->
+
+        <!-- В properties настройки подкдлючения к БД -->
+        <!-- И настройки пула соединений -->
+        <!--  -->
+        <properties>
+            <!--строка подключения к бд-->
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/lessons"/>
+            <!--логин пользователя бд-->
+            <property name="javax.persistence.jdbc.user" value="testuser"/>
+            <!-- пароль пользователя бд-->
+            <property name="javax.persistence.jdbc.password" value="testuser"/>
+            <!--используемый драйвер-->
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+
+
+            <!-- Будем использовать синтаксис PostgreSQL для написания запросов -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL82Dialect"/>
+            <!-- Отображать запросы в консоли -->
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <!-- Настройки пула соединений -->
+            <!-- Если ORM использует пул соединений, то надо смотреть как он его использует, как называются параметры -->
+            <property name="hibernate.c3p0.min_size" value="5"/>
+            <property name="hibernate.c3p0.max_size" value="20"/>
+            <property name="hibernate.c3p0.timeout" value="300"/>
+            <property name="hibernate.c3p0.max_statements" value="50"/>
+            <property name="hibernate.c3p0.idle_test_period" value="3000"/>
+            <!-- Что делать с таблицами при запуске программы: -->
+            <!-- validate | update | create | create-drop | none -->
+            <!-- none - ничего не делать
+                 create-drop - создать при запуске и удалить после завершения
+                 create - пересоздавать таблицы при запуске (удалить и заново создать)
+                 update - обновить структуру БД и таблиц
+                 validate - проверить классы и ничего не делать (как none, только с проверкой) -->
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <!-- загрузка sql скрипта из файла -->
+            <!-- <property name="javax.persistence.sql-load-script-source" value="META-INF/path_to_sql.sql" />-->
+        </properties>
+    </persistence-unit>
+</persistence>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.lld</groupId>
+    <artifactId>database-lessons</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.outputEncoding>UTF-8</project.build.outputEncoding>
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId> <!-- Библиотека для авто-кой генерации конструкторов, геттеров, сеттеров, методов toString(), equals(), hashCode(). Значение в конструкторах и сеттерах может проверять только на null -->
+            <version>1.18.16</version>
+            <scope>provided</scope> <!-- У библиотек-генераторов кода область видимости должна быть provided, чтобы она не попадала в итоговых архив -->
+        </dependency>
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.18</version>
+            <scope>runtime</scope> <!-- Драйвер будет использоваться только во время выполнения, поэтому можем прописать scope = runtime -->
+        </dependency>
+
+        <!-- пул соединений -->
+        <!-- Файл с настройками - c3p0.properties или c3p0.xml -->
+        <!-- Настройки можно сделать в коде. Им отдается приоритет перед файлами -->
+        <dependency>
+            <groupId>com.mchange</groupId>
+            <artifactId>c3p0</artifactId>
+            <version>0.9.5.5</version>
+        </dependency>
+
+        <!-- hibernate -->
+        <dependency>
+            <!-- Библиотека hibernate является ORM-библиотекой (object relational mapping) -->
+            <!-- ORM связывает реляционные БД с концепцией ООП по правилу: -->
+            <!-- название класса - название таблицы -->
+            <!-- названия полей - названия столбцов таблицы -->
+            <!-- типы данных полей - типы столбцов -->
+            <!-- остальная доп. инф. берется из аннотаций -->
+            <!-- Внутри исп-ся JDBC, JDBC будет исп-ть тот драйвер, который мы установим -->
+            <!-- Hibernate исп-ет пул соединений -->
+            <!-- Помимо Hibernate есть EclipseLink -->
+            <!-- ORM'ы являются реализациями JPA (java persistence API) -->
+            <!-- JPA - это набор абстракций, Hibernate и EclipseLink - это реализации этой абстракции -->
+            <!--  -->
+            <!--  -->
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.4.31.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-jpamodelgen</artifactId>
+            <version>5.4.32.Final</version> <!-- Версия разная - норм, работают не вместе -->
+            <scope>provided</scope>
+        </dependency>
+
+    </dependencies>
+
+</project>
